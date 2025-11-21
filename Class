@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Globalization;
+
+namespace Course_POO
+{
+    internal class Class_BankAccount
+    {
+        public int Conta { get; private set; }
+        public string Nome { get; set; }
+        public double Saldo { get; private set; }
+
+        public Class_BankAccount(int conta, string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome) || nome.Length < 5)
+                throw new ArgumentException("Nome inválido.");
+
+            Conta = conta;
+            Nome = nome;
+        }
+
+        public Class_BankAccount(int conta, string nome, double saldo) : this(conta, nome)
+        {
+            Saldo = saldo;
+        }
+
+        public void DepositarSaldo(double valor)
+        {
+            Saldo += valor;
+        }
+
+        public void SacarSaldo(double valor)
+        {
+            Saldo -= valor + 5.0;
+        }
+
+        public override string ToString()
+        {
+            return "Conta: "
+                + Conta
+                + ",Titular: "
+                + Nome
+                + ",Saldo: $"
+                + Saldo.ToString("F2", CultureInfo.InvariantCulture);
+        }
+
+
+    }
+}
